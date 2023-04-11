@@ -2146,27 +2146,7 @@ public class Tank extends Entity {
     }
 
     // Set whether a non-omni should have BA Grab Bars.
-    public void setBAGrabBars() {
-        if (isOmni()) {
-            return;
-        }
-        // TODO: I really hate this optional rule - what if some units are
-        // already loaded?
-        // if ba_grab_bars is on, then we need to add battlearmor handles,
-        // otherwise clamp mounts
-        // but first clear out whatever we have
-        Vector<Transporter> et = new Vector<>(getTransports());
-        for (Transporter t : et) {
-            if (t instanceof BattleArmorHandlesTank) {
-                removeTransporter(t);
-            }
-        }
-        if (game.getOptions().booleanOption(OptionsConstants.ADVANCED_BA_GRAB_BARS)) {
-            addTransporter(new BattleArmorHandlesTank());
-        } else {
-            addTransporter(new ClampMountTank());
-        }
-    }
+
 
     /**
      * Add a transporter for each trailer hitch the unit is equipped with, with a maximum of

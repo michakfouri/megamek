@@ -5720,6 +5720,28 @@ public abstract class Entity extends TurnOrdered implements Transporter, Targeta
         return false;
     }
 
+    public void setBAGrabBars() {
+        if (isOmni()) {
+            return;
+        }
+        // TODO: I really hate this optional rule - what if some units are
+        // already loaded?
+        // if ba_grab_bars is on, then we need to add battlearmor handles,
+        // otherwise clamp mounts
+        // but first clear out whatever we have
+        Vector<Transporter> et = new Vector<>(getTransports());
+        for (Transporter t : et) {
+            if (t instanceof BattleArmorHandlesTank) {
+                removeTransporter(t);
+            }
+        }
+        if (game.getOptions().booleanOption(OptionsConstants.ADVANCED_BA_GRAB_BARS)) {
+            addTransporter(new BattleArmorHandlesTank());
+        } else {
+            addTransporter(new ClampMountTank());
+        }
+    }
+
     public boolean hasC3i() {
         if (isShutDown() || isOffBoard()) {
             return false;
