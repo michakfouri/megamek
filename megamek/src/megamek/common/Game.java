@@ -2472,6 +2472,8 @@ public class Game extends AbstractGame implements Serializable {
     public void end(int winner, int winnerTeam) {
         setVictoryPlayerId(winner);
         setVictoryTeam(winnerTeam);
+        Ranking ranking = new Ranking(getPlayers(), getVictoryPlayerId(), getVictoryTeam());
+        ranking.updatePlayersRank();
         processGameEvent(new GameEndEvent(this));
 
     }
@@ -3144,15 +3146,6 @@ public class Game extends AbstractGame implements Serializable {
         for (Entity e : inGameTWEntities()) {
             updateEntityPositionLookup(e, null);
         }
-    }
-
-    private int countEntitiesInCache(List<Integer> entitiesInCache) {
-        int count = 0;
-        for (Coords c : entityPosLookup.keySet()) {
-            count += entityPosLookup.get(c).size();
-            entitiesInCache.addAll(entityPosLookup.get(c));
-        }
-        return count;
     }
 
     /**

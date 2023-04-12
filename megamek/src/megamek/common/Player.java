@@ -41,6 +41,8 @@ public final class Player extends TurnOrdered {
     private String email;
     private int id;
 
+    private int Score;
+
     private int team = TEAM_NONE;
 
     private boolean done = false; // done with phase
@@ -167,6 +169,14 @@ public final class Player extends TurnOrdered {
 
     public int getNbrMFInferno() {
         return numMfInferno;
+    }
+
+    public int getScore() {
+        return Score;
+    }
+
+    public void setScore(int score) {
+        Score = score;
     }
 
     public Camouflage getCamouflage() {
