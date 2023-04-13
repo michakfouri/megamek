@@ -473,26 +473,6 @@ public abstract class Mech extends Entity {
         }
     }
 
-    // Set whether a non-omni should have BA Grab Bars.
-    public void setBAGrabBars() {
-        if (isOmni()) {
-            return;
-        }
-        // TODO: I really hate this optional rule - what if some units are
-        // already loaded?
-        // if ba_grab_bars is on, then we need to add battlearmor handles,
-        // otherwise clamp mounts
-        // but first clear out whatever we have
-        // Removed the removal of transporters so that loaded units don't get ditched
-        // This is an unofficial rule and it doesn't work well anyway as changing the option
-        // does not affect units that are in the game
-        if (game.getOptions().booleanOption(OptionsConstants.ADVANCED_BA_GRAB_BARS)) {
-            addTransporter(new BattleArmorHandles());
-        } else {
-            addTransporter(new ClampMountMech());
-        }
-    }
-
     public void setProtomechClampMounts() {
         boolean front = false;
         boolean rear = false;
